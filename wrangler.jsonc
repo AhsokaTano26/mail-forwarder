@@ -1,0 +1,11 @@
+{
+  "name": "cqumirror_mail",
+  "compatibility_date": "2026-05-12",
+  "main": "src/index.ts",
+  "kv_namespaces": [
+    {
+      "binding": "MAIL_LIST",
+      "id": "42fc12acac4c40b88e78798ff97f39fb"
+    }
+  ]
+}
