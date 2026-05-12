@@ -7,5 +7,12 @@
       "binding": "MAIL_LIST",
       "id": "42fc12acac4c40b88e78798ff97f39fb"
     }
+  ],
+  "secrets_store_secrets": [
+    {
+      "binding": "ZEABUR_API_KEY",
+      "store_id": "909c682d73d447f6833977742b2a5cb9",
+      "secret_name": "ZEABUR_API_KEY"
+    }
   ]
 }
