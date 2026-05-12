@@ -67,11 +67,20 @@ export default {
         return;
       }
 
+      const FROM_EMAIL = env.FROM_EMAIL;
+
+      if (!FROM_EMAIL) {
+        console.error("[错误] 未配置发件邮箱 (FROM_EMAIL)");
+        return;
+      }
+
+      console.info(`准备以 ${FROM_EMAIL} 的身份转发邮件`);
+
       // 5. 构造 Payload (动态构建，确保有值才发)
       const payload = {
         emails: targets.map(to => {
           const emailObj: any = {
-            from: env.FROM_EMAIL,
+            from: `${FROM_EMAIL}`,
             to: [to],
             subject: `[转发] ${subject}`
           };

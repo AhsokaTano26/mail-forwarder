@@ -15,6 +15,9 @@
       "secret_name": "ZEABUR_API_KEY"
     }
   ],
+  "vars": {
+    "FROM_EMAIL": "cqumirror@tano.asia"
+  },
   "observability": {
     "enabled": false,
     "head_sampling_rate": 1,
