@@ -1,5 +1,15 @@
 import PostalMime from 'postal-mime';
 
+function formatToCNTime(dateInput: string | Date | undefined, fallback: string) {
+  if (!dateInput) return fallback;
+
+  const date = new Date(dateInput);
+
+  return date.toLocaleString('zh-CN', {
+    timeZone: 'Asia/Shanghai'
+  });
+}
+
 export default {
   async email(message: any, env: any) {
     const timestamp = new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });
@@ -20,15 +30,15 @@ export default {
       // 2. 注入原始发件人信息到正文顶部 (展示最原始的发件)
       const headerHtml = `
         <div style="background: #f4f4f4; border-left: 4px solid #ccc; padding: 10px; margin-bottom: 20px; color: #666; font-size: 14px;">
-          <strong>原始发件人:</strong> ${originalSender}<br>
-          <strong>发送时间:</strong> ${parsed.date || timestamp}<br>
+          <strong>原始发件人:</strong> ${parsed.from.name} ${parsed.from.address}<br>
+          <strong>发送时间:</strong> ${formatToCNTime(parsed.date, timestamp)}<br>
           <strong>转发来源:</strong> ${message.to}
         </div>
         <hr>
       `;
 
       const finalHtml = parsed.html ? (headerHtml + parsed.html) : "";
-      const finalLines = [`原始发件人: ${originalSender}`, `发送时间: ${parsed.date || timestamp}`, "---", ""];
+      const finalLines = [`原始发件人: ${originalSender}`, `发送时间: ${formatToCNTime(parsed.date, timestamp)}`, "---", ""];
       const finalText = (parsed.text ? (finalLines.join('\n') + parsed.text) : "");
 
       // 3. 安全处理附件 (有就发，没有就不发)
