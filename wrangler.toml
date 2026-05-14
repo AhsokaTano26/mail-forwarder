@@ -1,0 +1,32 @@
+name = "cqumirror_mail"
+compatibility_date = "2026-05-12"
+main = "./src/index.ts"
+
+[vars]
+FROM_EMAIL = "cqumirror@tano.asia"
+
+[[kv_namespaces]]
+binding = "MAIL_LIST"
+id = "42fc12acac4c40b88e78798ff97f39fb"
+
+# Secrets Store
+[[secrets_store_secrets]]
+binding = "ZEABUR_API_KEY"
+store_id = "909c682d73d447f6833977742b2a5cb9"
+secret_name = "ZEABUR_API_KEY"
+
+# Observability
+[observability]
+enabled = false
+head_sampling_rate = 1
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+persist = true
+invocation_logs = true
+
+[observability.traces]
+enabled = false
+persist = true
+head_sampling_rate = 1
